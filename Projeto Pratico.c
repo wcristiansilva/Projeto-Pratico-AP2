@@ -114,8 +114,10 @@ void cadastrar_Alunos(){
         printf("\nDigite o Email Institucional do Aluno: \n");
         fgets(email_inst,sizeof(email_inst),stdin);
 
-        for(int p = 0; p < MAX; p++){
-            if(aluno[p].ativo==1){
+        for(int p = 0; p < MAX; p++)
+        {
+            if(aluno[p].ativo==0)
+            {
                 aluno[p].pront = pront;
                 strcpy(aluno[p].nome,nome);
                 strcpy(aluno[p].data_nasc,data_nasc);
@@ -139,16 +141,20 @@ void cadastrar_Alunos(){
         printf("\nDigite a Nota da Lista de Exercicios: \n");
         scanf("%f%*c", &notas[3]);
 
-        for(int i=0;i<MAX;i++){
-                for(int n=0;n<4;n++){
-                    if(aluno[i].ativo==1){
-                        aluno[i].notas[n] = notas[n];
-                        aluno[i].notas[n] = notas[n];
-                        aluno[i].notas[n] = notas[n];
-                        aluno[i].notas[n] = notas[n];
-                        break;
-                    }
+        for(int i=0;i<MAX;i++)
+        {
+            for(int n=0;n<4;n++)
+            {
+                if(aluno[i].ativo==1)
+                {
+                    aluno[i].notas[n] = notas[n];
+                    aluno[i].notas[n] = notas[n];
+                    aluno[i].notas[n] = notas[n];
+                    aluno[i].notas[n] = notas[n];
+                    aluno[i].ativo=1;
+                    break;
                 }
+            }
         }
         printf("\n\t1 - Continuar\n\t0 - Sair\n");
         scanf("%d", &op);
@@ -157,3 +163,32 @@ void cadastrar_Alunos(){
         }
     }while(op!=0);
 }
+
+void listar_Alunos(){
+
+    system("cls");
+    printf("\nLISTA DE ALUNOS\n");
+    for (int i = 0; i < MAX; i++)
+    {
+        if (aluno[i].ativo==1)
+        {
+            printf("\n-----------------\n");
+            printf("Prontuario: %i",aluno[i].pront);
+            printf("Nome: %s",aluno[i].nome);
+            printf("Data de Nascimento: %s",aluno[i].data_nasc);
+            printf("Email Institucional: %s",aluno[i].email_inst);
+            printf("\n-----------------\n");
+            printf("As Notas Obtidas foram:");
+            printf("\n-----------------\n");
+            printf("Prova Pratica: %s", aluno[i].notas[i]);
+            printf("Projeto: %s", aluno[i].notas[i]);
+            printf("Lista de Exercicios: %s", aluno[i].notas[i]);
+            // printf("Prova Pratica: %s", aluno[i].notas[i]);
+            printf("\n-----------------\n");
+        }
+        
+    }
+    
+}
+
+void listar_Aluno(){}
