@@ -70,10 +70,10 @@ void sub_menu_Alunos(){
         getchar();
 
         switch (op){
-            /*case 1:
+            case 1:
                 listar_Alunos();
                 break;
-            case 2:
+            /*case 2:
                 listar_Aluno();
                 break;*/
             case 3:
@@ -92,6 +92,7 @@ void sub_menu_Alunos(){
             default:
                 printf("Opcao invalida!\n\n");
         }
+        getchar();
     } while (op!=0);
 }
 
@@ -173,17 +174,16 @@ void listar_Alunos(){
         if (aluno[i].ativo==1)
         {
             printf("\n-----------------\n");
-            printf("Prontuario: %i",aluno[i].pront);
-            printf("Nome: %s",aluno[i].nome);
-            printf("Data de Nascimento: %s",aluno[i].data_nasc);
-            printf("Email Institucional: %s",aluno[i].email_inst);
+            printf("Prontuario: %d",aluno[i].pront);
+            printf("Nome: %c",aluno[i].nome);
+            printf("Data de Nascimento: %c",aluno[i].data_nasc);
+            printf("Email Institucional: %c",aluno[i].email_inst);
             printf("\n-----------------\n");
             printf("As Notas Obtidas foram:");
             printf("\n-----------------\n");
-            printf("Prova Pratica: %s", aluno[i].notas[i]);
-            printf("Projeto: %s", aluno[i].notas[i]);
-            printf("Lista de Exercicios: %s", aluno[i].notas[i]);
-            // printf("Prova Pratica: %s", aluno[i].notas[i]);
+            printf("Prova Pratica: %f", aluno[i].notas[i]);
+            printf("Projeto: %f", aluno[i].notas[i]);
+            printf("Lista de Exercicios: %f", aluno[i].notas[i]);
             printf("\n-----------------\n");
         }
         
