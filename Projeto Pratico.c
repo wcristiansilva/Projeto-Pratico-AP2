@@ -96,7 +96,7 @@ void sub_menu_Alunos(){
 }
 
 void cadastrar_Alunos(){
-    system("cls");
+    
     int pront;
     char nome[50];
     char data_nasc[50];
@@ -105,6 +105,7 @@ void cadastrar_Alunos(){
     int op;
     do
     {
+        system("cls");
         printf("\nDigite o Prontuario do Aluno: \n");
         scanf("%d%*c", &pront);
         printf("\nDigite o Nome do Aluno: \n");
