@@ -137,18 +137,18 @@ void cadastrar_Alunos(){
         for(int i=0; i<MAX; i++)
         {
             if(aluno[i].ativo==0)
-                {
-                    aluno[i].pront = pront;
-                    strcpy(aluno[i].nome,nome);
-                    strcpy(aluno[i].data_nasc,data_nasc);
-                    strcpy(aluno[i].email_inst,email_inst);
-                    //aluno[i].notas[0] = notas[0];                    
-                    aluno[i].notas[0] = notas[0];
-                    aluno[i].notas[1] = notas[1];
-                    aluno[i].notas[2] = notas[2];
-                    aluno[i].ativo=1;
-                    break;
-                }
+            {
+                aluno[i].pront = pront;
+                strcpy(aluno[i].nome,nome);
+                strcpy(aluno[i].data_nasc,data_nasc);
+                strcpy(aluno[i].email_inst,email_inst);
+                //aluno[i].notas[0] = notas[0];                    
+                aluno[i].notas[0] = notas[0];
+                aluno[i].notas[1] = notas[1];
+                aluno[i].notas[2] = notas[2];
+                aluno[i].ativo=1;
+                break;
+            }
         }
         printf("\n\t1 - Continuar\n\t0 - Sair\n");
         scanf("%d", &op);
@@ -194,8 +194,16 @@ void remover_Aluno(){
     int pront;
     listar_Alunos();
     printf("\nDigite o Prontuario do aluno a ser excluido: \n");
-    scanf("%d", &pront);
-    aluno[pront].ativo=0;
+    scanf("%d%*c", &pront);
+    for (int i = 0; i < MAX; i++)
+    {
+        if (aluno[i].pront == pront)
+        {
+            aluno[pront].ativo=0;
+        }
+        else
+        printf("\nAluno nao encontrado!!\n");
+    }
     printf("\nAluno Excluido com Suscesso\n");
-     getchar();
+    getchar();
 }
