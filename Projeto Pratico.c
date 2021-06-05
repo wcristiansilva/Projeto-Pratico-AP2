@@ -155,8 +155,8 @@ void cadastrar_Alunos(){
         if(op==0){
             printf("\nSAINDO!!\n");
         }
-        getchar();
     }while(op!=0);
+    getchar();
 }
 
 void listar_Alunos(){
@@ -168,18 +168,18 @@ void listar_Alunos(){
     {
         if (aluno[i].ativo==1)
         {
-            printf("\n-----------------\n");
+            printf("-----------------\n");
             printf("Prontuario: %d\n",aluno[i].pront);
             printf("Nome: %s",aluno[i].nome);
             printf("Data de Nascimento: %s",aluno[i].data_nasc);
             printf("Email Institucional: %s\n",aluno[i].email_inst);
             printf("-----------------\n");
-            printf("As Notas Obtidas foram:");
+            printf("As Notas do Aluno foram:");
             printf("\n-----------------\n");
-            printf("Prova Pratica: %0.2f\n", aluno[i].notas[i]);
-            printf("Projeto: %0.2f\n", aluno[i].notas[i]);
-            printf("Lista de Exercicios: %0.2f\n", aluno[i].notas[i]);
-            printf("\n-----------------\n");
+            printf("Prova Pratica: %0.2f\n", aluno[i].notas[0]);
+            printf("Projeto: %0.2f\n", aluno[i].notas[1]);
+            printf("Lista de Exercicios: %0.2f\n", aluno[i].notas[2]);
+            printf("-----------------\n");
         }
         
     }
