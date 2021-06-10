@@ -41,12 +41,12 @@ void listar_Alunos();*/
         else
         printf("\nAluno nao encontrado!!\n");
     }
-    
+
     getchar();
 }*/
 
-void cadastrar_Alunos(){
-   
+void cadastrar_Alunos(){ //pronto
+
     int op, i=0;
 
     do
@@ -87,13 +87,13 @@ void cadastrar_Alunos(){
         cad_ALunos[i].ativo=1;
 
         i++;
-        
+
         printf("\n\t1 - Continuar\n\t0 - Sair\n");
         scanf("%d", &op);
         if(op==0){
             printf("\nSAINDO!!\n");
         }
-        
+
     } while(op!=0);
     getchar();
 }
@@ -101,11 +101,11 @@ void cadastrar_Alunos(){
 void listar_Aluno(){
 }
 
-void listar_Alunos(){
+void listar_Alunos(){ //pronto
 
     system("cls");
     printf("\n\t---LISTA DE ALUNOS---\n\n");
-    
+
     for (int i = 0; i < MAX; i++)
     {
         //system("cls");
@@ -124,12 +124,12 @@ void listar_Alunos(){
             printf("\nLista de Exercicios: %.2f", cad_ALunos[i].disc.Lista_Exercicio);
             printf("\n----------------------\n\n");
         }
-        
+
     }
     system("pause");
 }
 
-void sub_menu_Alunos(){
+void sub_menu_Alunos(){ //pronto
     int op;
     do
     {
@@ -155,7 +155,7 @@ void sub_menu_Alunos(){
                 cadastrar_Alunos();
                 break;
             /*case 4:
-                
+
                 _Aluno();
                 break;*/
             case 5:
@@ -202,7 +202,7 @@ void menu(){ //pronto
     } while (op!=0);
 }
 
-int main(){
+int main(){ //pronto
     menu();
     return 0;
 }
