@@ -92,11 +92,7 @@ void cadastrar_Alunos(){ //pronto
         printf("\n\t1 - Continuar\n\t0 - Sair\n");
         scanf("%d", &op);
         setbuf(stdin,NULL);
-        /*if (/* condition */)
-        {
-            /* code */
-        }*/
-        
+        // colocar um if para testar o final de adições de alunos basedo no MAX
         if(op==0){
             printf("\nSAINDO!!\n");
         }
