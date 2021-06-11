@@ -103,11 +103,11 @@ void cadastrar_Alunos(){ //pronto
 
 void listar_Aluno(){ // falta testar
 
-    char pront;
+    char pront[50];
     int pos;
 
-    printf("\nDigite o Prontuario do aluno a ser excluido: \n");
-    gets(pront);
+    printf("\nDigite o Prontuario do aluno a ser Pesquisado: \n");
+    scanf("%s%*c", &pront);
     setbuf(stdin,NULL);
 
     for(int i=0; i<MAX; i++) 
@@ -129,7 +129,7 @@ void listar_Aluno(){ // falta testar
     {
         printf(" \n Registro do Aluno Encontrado: ");
         printf("\n----------------------");
-        printf("\nProntuario: %s\n", cad_Alunos[pos].prontuario);
+        printf("\nProntuario: %s", cad_Alunos[pos].prontuario);
         printf("\nNome: %s", cad_Alunos[pos].nome);
         printf("\nData de Nascimento: %s", cad_Alunos[pos].data_nasc);
         printf("\nEmail Institucional: %s", cad_Alunos[pos].email_inst);
