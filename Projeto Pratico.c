@@ -5,11 +5,12 @@
 
 struct Disciplina{
     //char nome_Disc [50];
-    int prontuario;
+    char prontuario;
     float Prova_Pratica, Projeto, Lista_Exercicio;
 };
 struct Aluno{
-    int prontuario, ativo;
+    int ativo;
+    char prontuario;
     char nome[50];
     char data_nasc[50];
     char email_inst[50];
@@ -55,7 +56,7 @@ void cadastrar_Alunos(){ //pronto
 
         system("cls");
         printf("\nDigite o Prontuario do Aluno: \n");
-        scanf("%d", &cad_ALunos[i].prontuario);
+        gets(cad_ALunos[i].prontuario);
         fflush(stdin);
         printf("\nDigite o Nome do Aluno: \n");
         gets(cad_ALunos[i].nome);
@@ -74,7 +75,8 @@ void cadastrar_Alunos(){ //pronto
         system("pause");
 
         printf("\nDigite o Prontuario do Aluno: \n");
-        scanf("%d", &cad_ALunos[i].disc.prontuario);
+        gets(cad_ALunos[i].disc.prontuario);
+        fflush(stdin);
         //printf("\nDigite o nome da Disciplina: \n"); //, cad_Alunos[i].disc.nome_Disc
         //gets(cad_Alunos[i].disc.nome_Disc);
         printf("\nDigite a Nota da Prova Pratica: \n");
