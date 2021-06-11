@@ -27,14 +27,14 @@ void pesquisa();
 void listar_Alunos();*/
 
 /*void remover_Aluno(){
-    int pront;
+    char pront;
     listar_Alunos();
     printf("\nDigite o Prontuario do aluno a ser excluido: \n");
     fflush(stdin);
-    scanf("%d", &pront);
+    gets(pront);
     for (int i = 0; i < MAX; i++)
     {
-        if (cad_Alunos[i].prontuario == pront)
+        if ((cad_Alunos[i].prontuario == pront)==0)
         {
             cad_Alunos[i].ativo=0;
             printf("\nAluno Excluido com Suscesso\n");
@@ -114,7 +114,7 @@ void listar_Alunos(){ //pronto
         if (cad_ALunos[i].ativo==1)
         {
             printf("\n----------------------");
-            printf("\nProntuario: %d\n", cad_ALunos[i].prontuario);
+            printf("\nProntuario: %s\n", cad_ALunos[i].prontuario);
             printf("\nNome: %s", cad_ALunos[i].nome);
             printf("\nData de Nascimento: %s", cad_ALunos[i].data_nasc);
             printf("\nEmail Institucional: %s", cad_ALunos[i].email_inst);
