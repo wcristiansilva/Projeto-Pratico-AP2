@@ -5,12 +5,12 @@
 
 struct Disciplina{
     //char nome_Disc [50];
-    char prontuario;
+    char prontuario[50];
     float Prova_Pratica, Projeto, Lista_Exercicio;
 };
 struct Aluno{
     int ativo;
-    char prontuario;
+    char prontuario[50];
     char nome[50];
     char data_nasc[50];
     char email_inst[50];
@@ -27,8 +27,7 @@ void remover_Aluno(){ // falta testar
 
     printf("\nDigite o Prontuario do aluno a ser excluido: \n");
     gets(pront);
-    fflush(stdin);
-    getchar();
+    setbuf(stdin,NULL);
 
     for (int i = 0; i < MAX; i++)
     {
@@ -52,19 +51,18 @@ void cadastrar_Alunos(){ //pronto
         /*for (int i = 0; i < MAX; i++){}*/
 
         system("cls");
-
         printf("Digite o Prontuario do Aluno: \n");
-        gets(cad_Alunos[i].prontuario);
-        fflush(stdin);
+        fgets(cad_Alunos[i].prontuario, sizeof(cad_Alunos[i].prontuario), stdin);
+        setbuf(stdin,NULL);
         printf("Digite o Nome do Aluno: \n");
         fgets(cad_Alunos[i].nome, sizeof(cad_Alunos[i].nome), stdin);
-        fflush(stdin);
+        setbuf(stdin,NULL);
         printf("Digite a Data de Nascimeto do Aluno: \n");
-        gets(cad_Alunos[i].data_nasc);
-        fflush(stdin);
+        fgets(cad_Alunos[i].data_nasc, sizeof(cad_Alunos[i].data_nasc), stdin);
+        setbuf(stdin,NULL);
         printf("Digite o Email Institucional do Aluno: \n");
-        gets(cad_Alunos[i].email_inst);
-        fflush(stdin);
+        fgets(cad_Alunos[i].email_inst, sizeof(cad_Alunos[i].email_inst), stdin);
+        setbuf(stdin,NULL);
 
         //Notas
 
@@ -73,27 +71,32 @@ void cadastrar_Alunos(){ //pronto
         printf("\nINFORME PRIMEIRO O PRONTUARIO DO MESMO!!\n");
         system("pause");
 
-        fflush(stdin);
-        printf("Digite o Prontuario do Aluno: \n");
-        gets(cad_Alunos[i].disc.prontuario);
-        fflush(stdin);
+        printf("\nDigite o Prontuario do Aluno: \n");
+        fgets(cad_Alunos[i].prontuario, sizeof(cad_Alunos[i].prontuario), stdin);
+        setbuf(stdin,NULL);
         //printf("\nDigite o nome da Disciplina: \n"); //, cad_Alunos[i].disc.nome_Disc
-        //gets(cad_Alunos[i].disc.nome_Disc);
+        //fgets(cad_Alunos[i].disc.nome_Disc, sizeof(cad_Alunos[i].disc.nome_Disc), stdin);
         printf("Digite a Nota da Prova Pratica: \n");
         scanf("%f", &cad_Alunos[i].disc.Prova_Pratica);
+        setbuf(stdin,NULL);
         printf("Digite a Nota da Projeto: \n");
+        setbuf(stdin,NULL);
         scanf("%f", &cad_Alunos[i].disc.Projeto);
+        setbuf(stdin,NULL);
         printf("Digite a Nota da Lista de Exercicios: \n");
         scanf("%f", &cad_Alunos[i].disc.Lista_Exercicio);
-        fflush(stdin);
+        setbuf(stdin,NULL);
         cad_Alunos[i].ativo=1;
-
-
         i++;
 
         printf("\n\t1 - Continuar\n\t0 - Sair\n");
         scanf("%d", &op);
-        getchar();
+        setbuf(stdin,NULL);
+        /*if (/* condition */)
+        {
+            /* code */
+        }*/
+        
         if(op==0){
             printf("\nSAINDO!!\n");
         }
@@ -109,8 +112,7 @@ void listar_Aluno(){ // falta testar
 
     printf("\nDigite o Prontuario do aluno a ser excluido: \n");
     gets(pront);
-    fflush(stdin);
-    getchar();
+    setbuf(stdin,NULL);
 
     for(int i=0; i<MAX; i++) 
     {
@@ -187,7 +189,7 @@ void sub_menu_Alunos(){ //pronto
         printf("\n\t5-Excluir Aluno"); // Excluir aluno / cancelar matricula
         printf("\n\t0-Sair\n\n");
         scanf("%d", &op);
-        getchar();
+        setbuf(stdin,NULL);
 
         switch (op){
             case 1:
@@ -227,7 +229,7 @@ void menu(){ //pronto
         printf("\n\t2-Relatorios");
         printf("\n\t0-Sair\n\n");
         scanf("%d", &op);
-        getchar();
+        setbuf(stdin,NULL);
 
         switch (op){
             case 1:
