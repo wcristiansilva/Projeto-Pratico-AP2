@@ -22,50 +22,46 @@ cad_Alunos Alunos[MAX];
 void remover_Aluno(cad_Alunos *Alunos){ // falta testar
     
     char pront[50];
-    int pos, i;
-
+    int pos;
+    system("cls");
+    printf("\n\t---LISTA DE ALUNOS---\n\n");
     listar_Alunos();
 
-    printf("\nDigite o Prontuario do aluno a ser excluido: \n");
-    gets(pront);
-    setbuf(stdin,NULL);
+    printf("\nDigite o Prontuario do Aluno a ser Excluido: \n");
+    scanf("%s", &pront);
 
-    for (i = 0; i < MAX; i++)
+    for (int i = 0; i < MAX; i++)
     {
         if (strcmp(pront, Alunos[i].prontuario)==0)
         {
             pos = i;
+            break;
         }else{
             pos = -1;
         }
     }
     if (pos == -1){
-        printf("\nAluno não Encontrado! \n");
+        printf("\nAluno nao Encontrado! \n");
     }else{
-        Alunos[i].ativo=0;
-        printf("\nAluno Excluido com Suscesso\n");
+        Alunos[pos].ativo=0;
+        printf("\nAluno Excluido com Suscesso! \n");
     }
     
     system("pause");
 }
 
-void cadastrar_Alunos(){ //pronto
+void cadastrar_Alunos(){ //Pronto
 
     int op, i=0,pos;
     char pront[50];
 
     do
     {
-        /*for (int i = 0; i < MAX; i++){}*/
-
         system("cls");
         printf("Digite o Prontuario do Aluno: \n");
         scanf("%s", &pront);
-        //fgets(Alunos[i].prontuario, sizeof(Alunos[i].prontuario), stdin);
         setbuf(stdin,NULL);
-        //fgets(Alunos[i].disc.prontuario, sizeof(Alunos[i].disc.prontuario), stdin);
-        //setbuf(stdin,NULL);
-
+        
         for(int j = 0; j<MAX; j++) 
         {
             if(strcmp(pront, Alunos[j].prontuario)==0){
@@ -76,9 +72,6 @@ void cadastrar_Alunos(){ //pronto
             }
         }
         if(pos == -1){
-            
-            //fgets(Alunos[i].prontuario, sizeof(Alunos[i].prontuario), stdin);
-            //fgets(Alunos[i].disc.prontuario, sizeof(Alunos[i].disc.prontuario), stdin);
             setbuf(stdin,NULL);
             strcpy(Alunos[i].prontuario, pront);
 
@@ -99,9 +92,6 @@ void cadastrar_Alunos(){ //pronto
             //printf("\nINFORME PRIMEIRO O PRONTUARIO DO MESMO!!\n");
             system("pause");
 
-            //printf("\nDigite o Prontuario do Aluno: \n");
-            //fgets(Alunos[i].prontuario, sizeof(Alunos[i].prontuario), stdin);
-            //setbuf(stdin,NULL);
             //printf("\nDigite o nome da Disciplina: \n"); //, cad_Alunos[i].disc.nome_Disc
             //fgets(cad_Alunos[i].disc.nome_Disc, sizeof(cad_Alunos[i].disc.nome_Disc), stdin);
             printf("Digite a Nota da Prova Pratica: \n");
@@ -155,7 +145,7 @@ void listar_Aluno(){ // Pronto
     }
  
     if(pos == -1){
-        printf(" \n Aluno não encontrado! \n\n");
+        printf(" \n Aluno nao encontrado! \n\n");
     } else{
         printf(" \n Aperte ENTER para mostrar o aluno: \n\n");
         getchar();
@@ -204,7 +194,7 @@ void listar_Alunos(){ //pronto
     system("pause");
 }
 
-void sub_menu_Alunos(){ //pronto
+void sub_menu_Alunos(){ //Pronto
     int op;
     do
     {
@@ -246,7 +236,7 @@ void sub_menu_Alunos(){ //pronto
     } while (op!=0);
 }
 
-void menu(){ //pronto
+void menu(){ //Pronto
     int op;
 
     do
@@ -276,7 +266,7 @@ void menu(){ //pronto
     } while (op!=0);
 }
 
-int main(){ //pronto
+int main(){ //Pronto
     menu();
     return 0;
 }
