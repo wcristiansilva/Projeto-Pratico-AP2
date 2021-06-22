@@ -50,6 +50,8 @@ void remover_Aluno(cad_Alunos *Alunos){ // falta testar
     system("pause");
 }
 
+//void alterar_Alunos(){// Fazer essa Funcao ainda}
+
 void cadastrar_Alunos(){ //Pronto
 
     int op, i=0,pos;
