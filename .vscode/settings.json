@@ -4,9 +4,12 @@
         "alunos",
         "ativo",
         "cadastrar",
+        "excluido",
         "institucional",
+        "lista",
         "nascimento",
         "pront",
-        "prontuario"
+        "prontuario",
+        "suscesso"
     ]
 }
