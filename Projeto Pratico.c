@@ -105,7 +105,7 @@ void alterar_Alunos(cad_Alunos *Alunos){// criando a funcao
     system("pause");
 }
 
-void cadastrar_Alunos(){ //Pronto
+void cadastrar_Alunos(cad_Alunos *Alunos){ //Pronto
 
     int op, i=0,pos;
     char pront[50];
@@ -261,7 +261,7 @@ void sub_menu_Alunos(){ //Pronto
         printf("\n\t4-Alterar Aluno");
         printf("\n\t5-Excluir Aluno"); // Excluir aluno / cancelar matricula
         printf("\n\t0-Sair\n\n");
-        scanf("%d", &op);
+        scanf(" %d ", &op);
         setbuf(stdin,NULL);
 
         switch (op){
@@ -272,7 +272,7 @@ void sub_menu_Alunos(){ //Pronto
                 listar_Aluno();
                 break;
             case 3:
-                cadastrar_Alunos();
+                cadastrar_Alunos(Alunos);
                 break;
             case 4:
                 alterar_Aluno(Alunos);
@@ -285,7 +285,7 @@ void sub_menu_Alunos(){ //Pronto
                 printf("\nSaindo do Menu Alunos!\n");
                 break;
             default:
-                printf("Opcao invalida!\n\n");
+                printf("\n\n!Opcao invalida!\n\n");
         }
         
     } while (op!=0);
