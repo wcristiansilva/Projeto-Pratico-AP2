@@ -50,7 +50,58 @@ void remover_Aluno(cad_Alunos *Alunos){ // Pronto
     system("pause");
 }
 
-//void alterar_Alunos(){// Fazer essa Funcao ainda}
+void alterar_Alunos(cad_Alunos *Alunos){// Fazer essa Funcao ainda
+    char pront[50];
+    int pos,op;
+    system("cls");
+    printf("\n\t---LISTA DE ALUNOS---\n\n");
+    listar_Alunos();
+
+    printf("\nDigite o Prontuario do Aluno a ser Atualizado: \n");
+    scanf(" %s", &pront);
+
+    for (int i = 0; i < MAX; i++)
+    {
+        if (strcmp(pront, Alunos[i].prontuario)==0)
+        {
+            pos = i;
+            break;
+        }else{
+            pos = -1;
+        }
+    }
+    if (pos == -1){
+        printf("\nAluno nao Encontrado ou Prontuario incorreto! \n");
+    }else{
+        // usarei um switch case
+        printf("\nEscolha os dados do aluno a ser Alterado!\n");
+        scanf(" %d", &op);
+
+        printf("\n\t1-Nome\n\t2-Data de Nascimento\n\t3-Email\n\t4-Nota Prova Pratica\n\t5-Nota Projeto\n\t6-Nota Lista de Exercicio\n\t7-Ativar Matricula do Aluno\n");
+
+        switch (op)
+        {
+        case 1:
+            printf("\nDigite o nome do Aluno a ser Alterado:");
+            fgets(Alunos[pos].nome, sizeof(Alunos[pos].nome), stdin);
+            break;
+        case 2:
+            printf("\nDigite a Data de Nascimento do Aluno a ser Alterado:");
+            fgets(Alunos[pos].data_nasc, sizeof(Alunos[pos].data_nasc), stdin);
+            break;
+        case 7:
+            Alunos[pos].ativo=1;
+            break;
+        default:
+            break;
+            
+        }
+        
+        printf("\nAluno Alterado com Suscesso! \n");
+    }
+    
+    system("pause");
+}
 
 void cadastrar_Alunos(){ //Pronto
 
