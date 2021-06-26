@@ -275,7 +275,7 @@ void sub_menu_Alunos(){ //Pronto
                 cadastrar_Alunos();
                 break;
             case 4:
-                //alterar_Aluno();
+                alterar_Aluno(Alunos);
                 break;
             case 5:
                 remover_Aluno(Alunos);
