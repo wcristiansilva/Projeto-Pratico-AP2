@@ -76,6 +76,7 @@ void alterar_Alunos(cad_Alunos *Alunos){// criando a funcao
         // usarei um switch case
         printf("\nEscolha os dados do aluno a ser Alterado!\n");
         scanf(" %d", &op);
+        setbuf(stdin,NULL);
 
         printf("\n\t1-Nome\n\t2-Data de Nascimento\n\t3-Email\n\t4-Nota Prova Pratica\n\t5-Nota Projeto\n\t6-Nota Lista de Exercicio\n\t7-Ativar Matricula do Aluno\n");
 
@@ -84,19 +85,40 @@ void alterar_Alunos(cad_Alunos *Alunos){// criando a funcao
         case 1:
             printf("\nDigite o nome do Aluno a ser Alterado:");
             fgets(Alunos[pos].nome, sizeof(Alunos[pos].nome), stdin);
+            setbuf(stdin,NULL);
             break;
         case 2:
             printf("\nDigite a Data de Nascimento do Aluno a ser Alterado:");
             fgets(Alunos[pos].data_nasc, sizeof(Alunos[pos].data_nasc), stdin);
+            setbuf(stdin,NULL);
+            break;
+        case 3:
+            printf("\nDigite o Email do Aluno a ser Alterado:");
+            fgets(Alunos[pos].email_inst, sizeof(Alunos[pos].email_inst), stdin);
+            setbuf(stdin,NULL);
+            break;
+        case 4:
+            printf("\nDigite a nota da Prova Pratica a ser Alterado:");
+            scanf("%f ", &Alunos[pos].disc.Prova_Pratica);
+            setbuf(stdin,NULL);
+            break;
+        case 5:
+            printf("\nDigite a nota do Projeto a ser Alterado:");
+            scanf("%f ", &Alunos[pos].disc.Projeto);
+            setbuf(stdin,NULL);
+            break;
+        case 6:
+            printf("\nDigite a nota da Lista de Exercicio a ser Alterado:");
+            scanf("%f ", &Alunos[pos].disc.Lista_Exercicio);
+            setbuf(stdin,NULL);
             break;
         case 7:
             Alunos[pos].ativo=1;
-            printf("\nAluno %s foi reativado na instituicao!", Alunos[pos].nome);
+            printf("\nO Aluno %s foi reativado na instituicao!", Alunos[pos].nome);
             break;
         default:
             printf("\n!OPCAO INVALIDA!\n");
             break;
-
         }
         
         printf("\nAluno Alterado com Suscesso! \n");
