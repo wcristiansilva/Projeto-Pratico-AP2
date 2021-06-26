@@ -50,7 +50,7 @@ void remover_Aluno(cad_Alunos *Alunos){ // Pronto
     system("pause");
 }
 
-void alterar_Alunos(cad_Alunos *Alunos){// Fazer essa Funcao ainda
+void alterar_Alunos(cad_Alunos *Alunos){// criando a funcao
     char pront[50];
     int pos,op;
     system("cls");
@@ -91,10 +91,12 @@ void alterar_Alunos(cad_Alunos *Alunos){// Fazer essa Funcao ainda
             break;
         case 7:
             Alunos[pos].ativo=1;
+            printf("\nAluno %s foi reativado na instituicao!", Alunos[pos].nome);
             break;
         default:
+            printf("\n!OPCAO INVALIDA!\n");
             break;
-            
+
         }
         
         printf("\nAluno Alterado com Suscesso! \n");
