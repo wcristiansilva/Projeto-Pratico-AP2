@@ -19,7 +19,7 @@ typedef struct {
 cad_Alunos Alunos[MAX];
 
 
-void remover_Aluno(cad_Alunos *Alunos){ // falta testar
+void remover_Aluno(cad_Alunos *Alunos){ // Pronto
     
     char pront[50];
     int pos;
