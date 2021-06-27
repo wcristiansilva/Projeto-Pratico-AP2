@@ -13,6 +13,8 @@
         "cancelar",
         "criando",
         "data",
+        "desejada",
+        "desenvolvimento",
         "dois",
         "es",
         "escolha",
@@ -52,5 +54,6 @@
         "testar",
         "todos",
         "usarei"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "Disabled"
 }

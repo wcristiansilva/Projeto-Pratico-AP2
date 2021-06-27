@@ -18,17 +18,25 @@ typedef struct {
 }cad_Alunos;
 cad_Alunos Alunos[MAX];
 
+void remover_Aluno();
+void alterar_Alunos();
+void cadastrar_Alunos();
+void listar_Aluno();
+void listar_Alunos();
+void sub_menu_Alunos();
+void menu();
 
 void remover_Aluno(cad_Alunos *Alunos){ // Pronto
     
     char pront[50];
     int pos;
+
     system("cls");
     printf("\n\t---LISTA DE ALUNOS---\n\n");
-    listar_Alunos();
+    listar_Alunos(Alunos);
 
     printf("\nDigite o Prontuario do Aluno a ser Excluido: \n");
-    scanf("%s", &pront);
+    gets(pront);
 
     for (int i = 0; i < MAX; i++)
     {
@@ -50,15 +58,16 @@ void remover_Aluno(cad_Alunos *Alunos){ // Pronto
     system("pause");
 }
 
-void alterar_Alunos(cad_Alunos *Alunos){// criando a funcao
+void alterar_Alunos(cad_Alunos *Alunos){// Pronto
     char pront[50];
-    int pos,op;
+    int pos;
+
     system("cls");
     printf("\n\t---LISTA DE ALUNOS---\n\n");
-    listar_Alunos();
+    listar_Alunos(Alunos);
 
-    printf("\nDigite o Prontuario do Aluno a ser Atualizado: \n");
-    scanf(" %s", &pront);
+    printf("\nDigite o Prontuario do Aluno a ser Atualizado:\n");
+    gets(pront);
 
     for (int i = 0; i < MAX; i++)
     {
@@ -73,12 +82,14 @@ void alterar_Alunos(cad_Alunos *Alunos){// criando a funcao
     if (pos == -1){
         printf("\nAluno nao Encontrado ou Prontuario incorreto! \n");
     }else{
-        // usarei um switch case
-        printf("\nEscolha os dados do aluno a ser Alterado!\n");
-        scanf(" %d", &op);
-        setbuf(stdin,NULL);
-
+        int op;
+        
+        printf("\n\t---ESCOLHA O DADO A SER ATUALIZADO---\n\n");
         printf("\n\t1-Nome\n\t2-Data de Nascimento\n\t3-Email\n\t4-Nota Prova Pratica\n\t5-Nota Projeto\n\t6-Nota Lista de Exercicio\n\t7-Ativar Matricula do Aluno\n");
+
+        printf("\nDigite a Opcao Desejada!\n");
+        scanf("%d", &op);
+        setbuf(stdin,NULL);
 
         switch (op)
         {
@@ -99,17 +110,17 @@ void alterar_Alunos(cad_Alunos *Alunos){// criando a funcao
             break;
         case 4:
             printf("\nDigite a nota da Prova Pratica a ser Alterado:");
-            scanf("%f ", &Alunos[pos].disc.Prova_Pratica);
+            scanf("%f", &Alunos[pos].disc.Prova_Pratica);
             setbuf(stdin,NULL);
             break;
         case 5:
             printf("\nDigite a nota do Projeto a ser Alterado:");
-            scanf("%f ", &Alunos[pos].disc.Projeto);
+            scanf("%f", &Alunos[pos].disc.Projeto);
             setbuf(stdin,NULL);
             break;
         case 6:
             printf("\nDigite a nota da Lista de Exercicio a ser Alterado:");
-            scanf("%f ", &Alunos[pos].disc.Lista_Exercicio);
+            scanf("%f", &Alunos[pos].disc.Lista_Exercicio);
             setbuf(stdin,NULL);
             break;
         case 7:
@@ -135,14 +146,14 @@ void cadastrar_Alunos(cad_Alunos *Alunos){ //Pronto
     do
     {
         system("cls");
-        printf("Digite o Prontuario do Aluno: \n");
-        scanf("%s", &pront);
+        printf("Digite o Prontuario do Aluno:\n");
+        gets(pront);
         setbuf(stdin,NULL);
         
         for(int j = 0; j<MAX; j++) 
         {
             if(strcmp(pront, Alunos[j].prontuario)==0){
-                printf("\n Prontuario ja Cadastrado! \n");
+                printf("\n!Prontuario ja Cadastrado!\n");
                 break;
             } else{
                 pos = -1;
@@ -152,13 +163,13 @@ void cadastrar_Alunos(cad_Alunos *Alunos){ //Pronto
             setbuf(stdin,NULL);
             strcpy(Alunos[i].prontuario, pront);
 
-            printf("Digite o Nome do Aluno: \n");
+            printf("Digite o Nome do Aluno:\n");
             fgets(Alunos[i].nome, sizeof(Alunos[i].nome), stdin);
             setbuf(stdin,NULL);
-            printf("Digite a Data de Nascimeto do Aluno: \n");
+            printf("Digite a Data de Nascimeto do Aluno:\n");
             fgets(Alunos[i].data_nasc, sizeof(Alunos[i].data_nasc), stdin);
             setbuf(stdin,NULL);
-            printf("Digite o Email Institucional do Aluno: \n");
+            printf("Digite o Email Institucional do Aluno:\n");
             fgets(Alunos[i].email_inst, sizeof(Alunos[i].email_inst), stdin);
             setbuf(stdin,NULL);
 
@@ -171,14 +182,14 @@ void cadastrar_Alunos(cad_Alunos *Alunos){ //Pronto
 
             //printf("\nDigite o nome da Disciplina: \n"); //, cad_Alunos[i].disc.nome_Disc
             //fgets(cad_Alunos[i].disc.nome_Disc, sizeof(cad_Alunos[i].disc.nome_Disc), stdin);
-            printf("Digite a Nota da Prova Pratica: \n");
+            printf("Digite a Nota da Prova Pratica:\n");
             scanf("%f", &Alunos[i].disc.Prova_Pratica);
             setbuf(stdin,NULL);
-            printf("Digite a Nota da Projeto: \n");
+            printf("Digite a Nota da Projeto:\n");
             setbuf(stdin,NULL);
             scanf("%f", &Alunos[i].disc.Projeto);
             setbuf(stdin,NULL);
-            printf("Digite a Nota da Lista de Exercicios: \n");
+            printf("Digite a Nota da Lista de Exercicios:\n");
             scanf("%f", &Alunos[i].disc.Lista_Exercicio);
             setbuf(stdin,NULL);
             Alunos[i].ativo=1;
@@ -197,9 +208,8 @@ void cadastrar_Alunos(cad_Alunos *Alunos){ //Pronto
     
 }
 
-void listar_Aluno(){ // Pronto
+void listar_Aluno(cad_Alunos *Alunos){ // Pronto
 
-    
     char pront[50];
     int pos, i;
 
@@ -212,7 +222,7 @@ void listar_Aluno(){ // Pronto
     for(i = 0; i<MAX; i++) 
     {
         if(strcmp(pront, Alunos[i].prontuario)==0){
-            printf("\n Aluno encontrado! \n");
+            printf("\nAluno encontrado! \n");
 
             pos = i;
             break;
@@ -222,9 +232,9 @@ void listar_Aluno(){ // Pronto
     }
  
     if(pos == -1){
-        printf(" \n Aluno nao encontrado! \n\n");
+        printf(" \nAluno nao encontrado! \n\n");
     } else{
-        printf(" \n Aperte ENTER para mostrar o aluno: \n\n");
+        printf(" \nAperte ENTER para mostrar o aluno: \n\n");
         getchar();
         printf("Registro do Aluno Encontrado: ");
         printf("\n----------------------");
@@ -243,7 +253,7 @@ void listar_Aluno(){ // Pronto
     system("pause");
 }
 
-void listar_Alunos(){ //pronto
+void listar_Alunos(cad_Alunos *Alunos){ //pronto
 
     system("cls");
     printf("\n\t---LISTA DE ALUNOS---\n\n");
@@ -283,21 +293,21 @@ void sub_menu_Alunos(){ //Pronto
         printf("\n\t4-Alterar Aluno");
         printf("\n\t5-Excluir Aluno"); // Excluir aluno / cancelar matricula
         printf("\n\t0-Sair\n\n");
-        scanf(" %d ", &op);
+        scanf("%d", &op);
         setbuf(stdin,NULL);
 
         switch (op){
             case 1:
-                listar_Alunos();
+                listar_Alunos(Alunos);
                 break;
             case 2:
-                listar_Aluno();
+                listar_Aluno(Alunos);
                 break;
             case 3:
                 cadastrar_Alunos(Alunos);
                 break;
             case 4:
-                alterar_Aluno(Alunos);
+                alterar_Alunos(Alunos);
                 break;
             case 5:
                 remover_Aluno(Alunos);
@@ -330,9 +340,10 @@ void menu(){ //Pronto
             case 1:
                 sub_menu_Alunos();
                 break;
-            /*case 2:
-                sub_menu_Relatorios();
-                break;*/
+            case 2:
+                printf("\nFUNCAO EM DESENVOLVIMENTO!\n");
+                //sub_menu_Relatorios();
+                break;
             case 0:
                 printf("\nSAINDO!\n");
                 break;
@@ -344,6 +355,7 @@ void menu(){ //Pronto
 }
 
 int main(){ //Pronto
+    
     menu();
     return 0;
-}
+} 
