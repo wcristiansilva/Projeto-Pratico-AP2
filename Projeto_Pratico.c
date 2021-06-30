@@ -86,7 +86,7 @@ void alunos_Aprovados(cad_Alunos *Alunos ){ //Fazendo
 
 void alunos_Reprovados(cad_Alunos *Alunos){// Fazendo
 
-    int rep=0;
+    int cont_rep=0;
 
     if (Alunos->ativo!=NULL){
         
@@ -97,6 +97,7 @@ void alunos_Reprovados(cad_Alunos *Alunos){// Fazendo
 
             if((Alunos[i].ativo==1)&&(Alunos[i].disc.Media<7)){
 
+                cont_rep += 1;
                 printf("\n----------------------------------------------");
                 printf("\nProntuario: %s", Alunos[i].prontuario);
                 printf("\nNome: %s", Alunos[i].nome);
@@ -111,12 +112,12 @@ void alunos_Reprovados(cad_Alunos *Alunos){// Fazendo
                 printf("\nA sua Media foi: %.2f", Alunos[i].disc.Media);
                 printf("\n----------------------------------------------\n\n");
             
-            } else{
-                rep = -1;
+            }else{
+                cont_rep = 0;
             }
         }
         
-        if (rep == -1){
+        if (cont_rep == 0){
             system("cls");
             printf("\n\t---NAO HA ALUNOS REPROVADOS!---\n\n");
         }
