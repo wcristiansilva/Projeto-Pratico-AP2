@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define MAX 2
+#define MAX 3
 
 // DECLARAÇÃO DAS STRUCTS
 
@@ -44,60 +44,19 @@ void menu();
 
 void alunos_Aprovados(cad_Alunos *Alunos ){ //Fazendo
 
-    int rep=0;
+    int pos, cad;
 
-    if(Alunos->ativo!=NULL){
-        if((Alunos->ativo==1)&&(Alunos->disc.Media<7)){
-            system("cls");
-            printf("\n\t---ALUNOS APROVADOS---\n");
+    system("cls");
+    printf("\n\t---ALUNOS APROVADOS---\n");
 
-            for(int i=0; i<MAX; i++){
-                    
-                printf("\n----------------------------------------------");
-                printf("\nProntuario: %s", Alunos[i].prontuario);
-                printf("\nNome: %s", Alunos[i].nome);
-                printf("\nData de Nascimento: %s", Alunos[i].data_nasc);
-                printf("\nEmail Institucional: %s", Alunos[i].email_inst);
-                printf("\n----------------------------------------------");
-                printf("\nAs Notas do Aluno %s foram:", Alunos[i].nome);
-                printf("\n----------------------------------------------");
-                printf("\nProva Pratica: %.2f", Alunos[i].disc.Prova_Pratica);
-                printf("\nProjeto: %.2f", Alunos[i].disc.Projeto);
-                printf("\nLista de Exercicios: %.2f", Alunos[i].disc.Lista_Exercicio);
-                printf("\nA sua Media foi: %.2f", Alunos[i].disc.Media);
-                printf("\n----------------------------------------------\n\n");
-                
-            }
-        } else{
-            rep = -1;
-        }
+    if(Alunos->ativo==NULL){
+        cad = 1;
+    } else {
         
-        if (rep ==-1){
-            system("cls");
-            printf("\n\t---NAO HA ALUNOS APROVADOS!---\n\n");
-        }
-    }
-    else{
-        system("cls");
-        printf("\n\t---NAO HA ALUNOS CADASTRADOS!---\n\n");
-    }
-    system("pause");
-}
+        for(int i=0; i<MAX; i++) {
 
-void alunos_Reprovados(cad_Alunos *Alunos){// Fazendo
+            if((Alunos[i].ativo==1)&(Alunos[i].disc.Media>=7)) {
 
-    int cont_rep=0;
-
-    if (Alunos->ativo!=NULL){
-        
-        system("cls");
-        printf("\n\t---ALUNOS REPROVADOS---\n");
-
-        for(int i=0; i<MAX; i++){
-
-            if((Alunos[i].ativo==1)&&(Alunos[i].disc.Media<7)){
-
-                cont_rep += 1;
                 printf("\n----------------------------------------------");
                 printf("\nProntuario: %s", Alunos[i].prontuario);
                 printf("\nNome: %s", Alunos[i].nome);
@@ -112,16 +71,54 @@ void alunos_Reprovados(cad_Alunos *Alunos){// Fazendo
                 printf("\nA sua Media foi: %.2f", Alunos[i].disc.Media);
                 printf("\n----------------------------------------------\n\n");
             
-            }else{
-                cont_rep = 0;
             }
         }
         
-        if (cont_rep == 0){
-            system("cls");
-            printf("\n\t---NAO HA ALUNOS REPROVADOS!---\n\n");
+    }
+
+    if (cad == 1){
+        system("cls");
+        printf("\n\t---NAO HA ALUNOS CADASTRADOS!---\n\n");
+    }
+    
+    system("pause");
+}
+
+void alunos_Reprovados(cad_Alunos *Alunos){// Fazendo
+
+    int pos, cad;
+
+    system("cls");
+    printf("\n\t---ALUNOS REPROVADOS---\n");
+
+    if(Alunos->ativo==NULL){
+        cad = 1;
+    } else {
+        
+        for(int i=0; i<MAX; i++) {
+
+            if((Alunos[i].ativo==1)&(Alunos[i].disc.Media<7)) {
+
+                printf("\n----------------------------------------------");
+                printf("\nProntuario: %s", Alunos[i].prontuario);
+                printf("\nNome: %s", Alunos[i].nome);
+                printf("\nData de Nascimento: %s", Alunos[i].data_nasc);
+                printf("\nEmail Institucional: %s", Alunos[i].email_inst);
+                printf("\n----------------------------------------------");
+                printf("\nAs Notas do Aluno %s foram:", Alunos[i].nome);
+                printf("\n----------------------------------------------");
+                printf("\nProva Pratica: %.2f", Alunos[i].disc.Prova_Pratica);
+                printf("\nProjeto: %.2f", Alunos[i].disc.Projeto);
+                printf("\nLista de Exercicios: %.2f", Alunos[i].disc.Lista_Exercicio);
+                printf("\nA sua Media foi: %.2f", Alunos[i].disc.Media);
+                printf("\n----------------------------------------------\n\n");
+            
+            }
         }
-    } else{
+        
+    }
+
+    if (cad == 1){
         system("cls");
         printf("\n\t---NAO HA ALUNOS CADASTRADOS!---\n\n");
     }
@@ -131,30 +128,31 @@ void alunos_Reprovados(cad_Alunos *Alunos){// Fazendo
 
 void alunos_Inativos(cad_Alunos *Alunos){ //Pronto
 
+    system("cls");
     if(Alunos->ativo!=NULL){
-        if(Alunos->ativo!=1){
+        
             system("cls");
             printf("\n\t---LISTA DE ALUNOS INATIVOS/EXCLUIDOS---\n\n");
-            for (int i = 0; i < MAX; i++)
-            {
-                printf("\n---------------------------");
-                printf("\nProntuario: %s", Alunos[i].prontuario);
-                printf("\nNome: %s", Alunos[i].nome);
-                printf("\nData de Nascimento: %s", Alunos[i].data_nasc);
-                printf("\nEmail Institucional: %s", Alunos[i].email_inst);
-                printf("\n---------------------------");
-                printf("\nAs Notas do Aluno %s foram:", Alunos[i].nome);
-                printf("\n---------------------------");
-                printf("\nProva Pratica: %.2f", Alunos[i].disc.Prova_Pratica);
-                printf("\nProjeto: %.2f", Alunos[i].disc.Projeto);
-                printf("\nLista de Exercicios: %.2f", Alunos[i].disc.Lista_Exercicio);
-                printf("\n---------------------------\n\n");
-            }
-        }else{
-        system("cls");
-        printf("\n\t---NAO HA ALUNOS INATIVOS/EXCLUIDOS!---\n\n");
-        }
+            for (int i = 0; i < MAX; i++){
 
+                if(Alunos[i].ativo==2){
+                    printf("\n---------------------------");
+                    printf("\nProntuario: %s", Alunos[i].prontuario);
+                    printf("\nNome: %s", Alunos[i].nome);
+                    printf("\nData de Nascimento: %s", Alunos[i].data_nasc);
+                    printf("\nEmail Institucional: %s", Alunos[i].email_inst);
+                    printf("\n---------------------------");
+                    printf("\nAs Notas do Aluno %s foram:", Alunos[i].nome);
+                    printf("\n---------------------------");
+                    printf("\nProva Pratica: %.2f", Alunos[i].disc.Prova_Pratica);
+                    printf("\nProjeto: %.2f", Alunos[i].disc.Projeto);
+                    printf("\nLista de Exercicios: %.2f", Alunos[i].disc.Lista_Exercicio);
+                    printf("\n---------------------------\n\n");
+                }else{
+                    system("cls");
+                    printf("\n\t---NAO HA ALUNOS INATIVOS/EXCLUIDOS!---\n\n");
+                }            
+            }
     }else{
         system("cls");
         printf("\n\t---NAO HA ALUNOS CADASTRADOS!---\n\n");
@@ -172,6 +170,7 @@ void remover_Aluno(cad_Alunos *Alunos){ // Pronto
     char pront[50];
     int pos;
 
+    system("cls");
     if(Alunos->ativo!=NULL){
 
         system("cls");
@@ -192,12 +191,14 @@ void remover_Aluno(cad_Alunos *Alunos){ // Pronto
             }
         }
         if (pos == -1){
+            system("cls");
             printf("\n\t---Aluno nao Encontrado!---\n");
         }else{
             /*
             ALUNO->ATIVO = 1 -- ALUNO ATIVO
             ALUNO->ATIVO = 2 -- ALUNO EXCLUIDO/INATIVO
             */
+            system("cls");
             Alunos[pos].ativo=2;
             printf("\n\t---Aluno Excluido com Suscesso!---\n");
         }
@@ -213,7 +214,9 @@ void alterar_Alunos(cad_Alunos *Alunos){// Pronto
     
     char pront[50];
     int pos;
+    float Soma;
 
+    system("cls");
     if(Alunos->ativo!=NULL){
         system("cls");
         printf("\n\t---LISTA DE ALUNOS---\n\n");
@@ -232,12 +235,13 @@ void alterar_Alunos(cad_Alunos *Alunos){// Pronto
             }
         }
         if (pos == -1){
+            system("cls");
             printf("\n\t---Aluno nao Encontrado ou Prontuario incorreto!---\n");
         }else{
             int op;
-            
+            system("cls");
             printf("\n\t---ESCOLHA O DADO A SER ATUALIZADO---\n\n");
-            printf("\n\t1-Nome\n\t2-Data de Nascimento\n\t3-Email\n\t4-Nota Prova Pratica\n\t5-Nota Projeto\n\t6-Nota Lista de Exercicio\n\t7-Ativar Matricula do Aluno\n");
+            printf("\n\t1-Nome\n\t2-Data de Nascimento\n\t3-Email\n\t4-Nota Prova Pratica\n\t5-Nota Projeto\n\t6-Nota Lista de Exercicio\n\t7-Ativar Matricula do Aluno\n\t8-Desativar Matricula do Aluno\n");
 
             printf("\nDigite a Opcao Desejada!\n");
             scanf("%d", &op);
@@ -246,44 +250,60 @@ void alterar_Alunos(cad_Alunos *Alunos){// Pronto
             switch (op)
             {
             case 1:
+                system("cls");
                 printf("\nDigite o nome do Aluno a ser Alterado:\n");
                 fgets(Alunos[pos].nome, sizeof(Alunos[pos].nome), stdin);
                 setbuf(stdin,NULL);
                 break;
             case 2:
+                system("cls");
                 printf("\nDigite a Data de Nascimento do Aluno a ser Alterado:\n");
                 fgets(Alunos[pos].data_nasc, sizeof(Alunos[pos].data_nasc), stdin);
                 setbuf(stdin,NULL);
                 break;
             case 3:
+                system("cls");
                 printf("\nDigite o Email do Aluno a ser Alterado:\n");
                 fgets(Alunos[pos].email_inst, sizeof(Alunos[pos].email_inst), stdin);
                 setbuf(stdin,NULL);
                 break;
             case 4:
+                system("cls");
                 printf("\nDigite a nota da Prova Pratica a ser Alterado:\n");
                 scanf("%f", &Alunos[pos].disc.Prova_Pratica);
                 setbuf(stdin,NULL);
                 break;
             case 5:
+                system("cls");
                 printf("\nDigite a nota do Projeto a ser Alterado:\n");
                 scanf("%f", &Alunos[pos].disc.Projeto);
                 setbuf(stdin,NULL);
                 break;
             case 6:
+                system("cls");
                 printf("\nDigite a nota da Lista de Exercicio a ser Alterado:\n");
                 scanf("%f", &Alunos[pos].disc.Lista_Exercicio);
                 setbuf(stdin,NULL);
                 break;
             case 7:
+                system("cls");
                 Alunos[pos].ativo=1;
                 printf("\nO Aluno %s foi reativado na instituicao!", Alunos[pos].nome);
                 break;
+            case 8:
+                system("cls");
+                Alunos[pos].ativo=2;
+                printf("\nO Aluno %s foi desativado na instituicao!", Alunos[pos].nome);
+                break;
             default:
+                system("cls");
                 printf("\n\t---!OPCAO INVALIDA!---\n");
                 break;
             }
             
+            Soma = Alunos[pos].disc.Prova_Pratica + Alunos[pos].disc.Projeto + Alunos[pos].disc.Lista_Exercicio;
+            Alunos[pos].disc.Media = Soma/3;
+
             printf("\n\t---Aluno Alterado com Suscesso!---\n");
         }
     }else{
@@ -339,6 +359,7 @@ void cadastrar_Alunos(cad_Alunos *Alunos){ //Pronto
             //printf("\nDigite o nome da Disciplina: \n"); //, cad_Alunos[i].disc.nome_Disc
             //fgets(cad_Alunos[i].disc.nome_Disc, sizeof(cad_Alunos[i].disc.nome_Disc), stdin);
 
+            system("cls");
             printf("Digite a Nota da Prova Pratica:\n");
             scanf("%f", &Alunos[i].disc.Prova_Pratica);
             setbuf(stdin,NULL);
@@ -364,8 +385,21 @@ void cadastrar_Alunos(cad_Alunos *Alunos){ //Pronto
         scanf("%d", &op);
         setbuf(stdin,NULL);
         // colocar um if para testar o final de adições de alunos basedo no MAX
+        if (op == 1)
+        {   
+            if (i >= MAX)
+            {
+                system("cls");
+                printf("\nLimite de cadastros atingido!!\n");
+                op = 0;
+                break;
+            }
+        }
+        
         if(op==0){
+            system("cls");
             printf("\nSAINDO!!\n");
+            system("cls");
         }
 
     } while(op!=0);
@@ -377,17 +411,19 @@ void listar_Aluno(cad_Alunos *Alunos){ // Pronto
     char pront[50];
     int pos, i;
 
+    system("cls");
     if(Alunos->ativo!=NULL){
         system("cls");
-        printf("\nDigite o Prontuario do aluno a ser Pesquisado: \n");
+        printf("\nDigite o Prontuario do aluno a ser Pesquisado:\n");
         gets(pront);
         setbuf(stdin,NULL);
 
         for(i = 0; i<MAX; i++) 
         {
             if(strcmp(pront, Alunos[i].prontuario)==0){
+                system("cls");
                 printf("\n\t---Aluno encontrado!---\n");
-
+                //getchar();
                 pos = i;
                 break;
             } else{
@@ -396,10 +432,11 @@ void listar_Aluno(cad_Alunos *Alunos){ // Pronto
         }
     
         if(pos == -1){
+            system("cls");
             printf(" \n\t---Aluno nao encontrado!---\n\n");
         } else{
-            system("cls");
-            printf(" \n\tAperte ENTER para mostrar o aluno:\n\n");
+            //system("cls");
+            printf(" \nAperte ENTER para mostrar o aluno:\n\n");
             getchar();
 
             system("cls");
@@ -415,6 +452,7 @@ void listar_Aluno(cad_Alunos *Alunos){ // Pronto
             printf("\nProva Pratica: %.2f", Alunos[pos].disc.Prova_Pratica);
             printf("\nProjeto: %.2f", Alunos[pos].disc.Projeto);
             printf("\nLista de Exercicios: %.2f", Alunos[pos].disc.Lista_Exercicio);
+            printf("\nMedia: %.2f", Alunos[pos].disc.Media);
             printf("\n----------------------\n\n");
         }
     }else{
@@ -423,12 +461,13 @@ void listar_Aluno(cad_Alunos *Alunos){ // Pronto
     }
 
     system("pause");
+    system("cls");
 }
 
 void listar_Alunos(cad_Alunos *Alunos){ //pronto
 
+    system("cls");
     if(Alunos->ativo!=NULL){
-        
         system("cls");
         printf("\n\t---LISTA DE ALUNOS---\n\n");
         for (int i = 0; i < MAX; i++)
@@ -456,10 +495,13 @@ void listar_Alunos(cad_Alunos *Alunos){ //pronto
         printf("\n\t---NAO HA ALUNOS CADASTRADOS!---\n\n");
     }
     system("pause");
+    system("cls");
 }
 
 void sub_menu_Alunos(){ //Pronto
     int op;
+
+    system("cls");
     do
     {
         system("cls");
@@ -542,6 +584,7 @@ void sub_menu_Relatorios(){// Pronto
 void menu(){ //Pronto
     int op;
 
+    system("cls");
     do
     {
         system("cls");
@@ -560,6 +603,7 @@ void menu(){ //Pronto
                 sub_menu_Relatorios();
                 break;
             case 0:
+                system("cls");
                 printf("\nSAINDO!\n");
                 break;
             default:
