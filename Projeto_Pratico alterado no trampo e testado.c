@@ -334,7 +334,7 @@ void alterar_Alunos(cad_Alunos *Alunos) { // Pronto
 	system("pause");
 }
 
-void cadastrar_Alunos(cad_Alunos *Alunos/*, Qtd_Cad *Cont_Cad*/) { // Pronto	
+void cadastrar_Alunos(cad_Alunos *Alunos) { // Pronto	
 	
 	int op, i=0, j, pos=0;
 	float Soma;
