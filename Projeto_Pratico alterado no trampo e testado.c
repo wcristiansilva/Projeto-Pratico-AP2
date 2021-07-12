@@ -1,20 +1,21 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define MAX 3 // aqui precisa adequar para a quantidade que podera ter
+#include<locale.h>
+#define MAX 2 // aqui precisa adequar para a quantidade que podera ter
 
 // DECLARAÇÃO DAS STRUCTS
 
-/*typedef struct {
-	int Qtd_Cadastro = 0;
+typedef struct {
+	int qtd_Cadastro;
 }Qtd_Cadastro;
-Qtd_Cadastro Qtd_Cad;*/
+
 typedef struct Disciplina {
 	char nome_Disc [50];
 	char prontuario[50];
 	float Prova_Pratica, Projeto, Lista_Exercicio, Media;
 };
-typedef struct {
+typedef struct{
 	int ativo;
 	char prontuario[50];
 	char nome[50];
@@ -22,13 +23,18 @@ typedef struct {
 	char email_inst[50];
 	struct Disciplina disc;
 } cad_Alunos;
+
 cad_Alunos Alunos[MAX];
+Qtd_Cadastro Qtd_Cad;
 
 // FIM DA DECLARAÇÃO DAS STRUCTS
 
 
 // DECLARAÇÃO DAS FUNÇÕES
 
+void salvar_em_Arquivos();
+void ler_arquivo_Struct();
+void ler_de_Arquivos();
 void alunos_Aprovados();
 void alunos_Reprovados();
 void alunos_Inativos();
@@ -42,19 +48,70 @@ void menu();
 
 // FIM DA DECLARAÇÃO DAS FUNÇÕES
 
+// FUNÇÕES DE ARQUIVOS
+
+void salvar_em_Arquivos(cad_Alunos *Alunos, Qtd_Cadastro *Qtd_Cad){ // Pronta
+
+	int len_Alunos = Qtd_Cad->qtd_Cadastro;
+	FILE *arquivo;
+
+	arquivo = fopen("CADASTRO ALUNOS.txt", "w");
+	if (arquivo == NULL)
+	{
+		printf("\nNÃO FOI POSSÍVEL ABRIR E SALVAR OS DADOS NO ARQUIVO!");
+		getchar();
+		exit(0);
+	}else
+	{
+		//fprintf(arquivo, "%d\n", Qtd_Cad->qtd_Cadastro);
+		for(int i = 0; i < len_Alunos; i++)
+		{
+			// escreve cada elemento do vetor no arquivo
+			fprintf(arquivo, "%d %s %s %s %s %s %.2f %.2f %.2f %.2f\n", Alunos[i].ativo, Alunos[i].prontuario, Alunos[i].nome, Alunos[i].data_nasc, Alunos[i].email_inst, Alunos[i].disc.nome_Disc, Alunos[i].disc.Prova_Pratica, Alunos[i].disc.Projeto, Alunos[i].disc.Lista_Exercicio, Alunos[i].disc.Media);
+		}
+		fclose(arquivo); // aborta o programa
+		printf("\nARQUIVO GRAVADO COM SUCESSO!\n");
+	}
+	sleep(2);	
+}
+
+void ler_arquivo_Struct(cad_Alunos *Alunos, Qtd_Cadastro *Qtd_Cad){
+	
+	FILE *arquivo;
+	arquivo = fopen("CADASTRO ALUNOS.txt", "r+");
+
+	int quant =0;
+
+	if (arquivo == NULL)
+	{
+		printf("\nNÃO FOI POSSÍVEL ABRIR O ARQUIVO E SALVAR OS DADOS NA STRUCT!");
+		getchar();
+		exit(0);
+	}else
+	{
+		//fscanf(arquivo, "%d\n", &quant);
+		while(fscanf(arquivo, "%d" "%s" "%s" "%s" "%s" "%s" "%.2f" "%.2f" "%.2f" "%.2f", &Alunos[quant].ativo, Alunos[quant].prontuario, Alunos[quant].nome, Alunos[quant].data_nasc, Alunos[quant].email_inst, Alunos[quant].disc.nome_Disc, &Alunos[quant].disc.Prova_Pratica, &Alunos[quant].disc.Projeto, &Alunos[quant].disc.Lista_Exercicio, &Alunos[quant].disc.Media)!= EOF){
+			quant +=1;
+		}
+		fclose(arquivo);
+	}	
+}
+
+// FIM DE ARQUIVOS
+
 
 // FUNÇÕES RELATORIOS
 
 void alunos_Aprovados(cad_Alunos *Alunos ) { // Pronto
 
-	int rep=0, i;
+	int rep=0;
 
 	if(Alunos->ativo!=NULL) {
 
 		system("cls");
 		printf("\n\t---ALUNOS APROVADOS---\n");
 
-		for(i=0; i<MAX; i++) {
+		for(int i=0; i<MAX; i++) {
 
 			if((Alunos[i].ativo==1)&&(Alunos[i].disc.Media>=7)) {
 
@@ -334,12 +391,12 @@ void alterar_Alunos(cad_Alunos *Alunos) { // Pronto
 	system("pause");
 }
 
-void cadastrar_Alunos(cad_Alunos *Alunos) { // Pronto	
+void cadastrar_Alunos(cad_Alunos *Alunos, Qtd_Cadastro *Qtd_Cad) { // Pronto
 	
 	int op, i=0, j, pos=0;
 	float Soma;
 	char pront[50];
-
+	
 	for(int c; c < MAX; c++) // for usado para verificar se já ha cadastros no sistemas para não haver sobreposição
 	{
 		if(Alunos[c].ativo!=NULL){
@@ -357,7 +414,7 @@ void cadastrar_Alunos(cad_Alunos *Alunos) { // Pronto
 		for(j = 0; j<MAX; j++) {
 			if(strcmp(pront, Alunos[j].prontuario)==0) {
 				printf("\n!Prontuario ja Cadastrado!\n");
-				_sleep(1000);
+				sleep(1);
 				pos = -1;
 				break;
 			}
@@ -375,20 +432,23 @@ void cadastrar_Alunos(cad_Alunos *Alunos) { // Pronto
 			strcpy(Alunos[i].disc.prontuario, pront);
 
 			printf("Digite o Nome do Aluno:\n");
-			fgets(Alunos[i].nome, sizeof(Alunos[i].nome), stdin);
+			//fgets(Alunos[i].nome, sizeof(Alunos[i].nome), stdin);
+			scanf("%50[^\n]%*c", Alunos[i].nome);
 			setbuf(stdin,NULL);
 			printf("Digite a Data de Nascimeto do Aluno:\n");
-			fgets(Alunos[i].data_nasc, sizeof(Alunos[i].data_nasc), stdin);
+			scanf("%50[^\n]%*c", Alunos[i].data_nasc);
+			//fgets(Alunos[i].data_nasc, sizeof(Alunos[i].data_nasc), stdin);
 			setbuf(stdin,NULL);
 			printf("Digite o Email Institucional do Aluno:\n");
-			fgets(Alunos[i].email_inst, sizeof(Alunos[i].email_inst), stdin);
+			scanf("%50[^\n]%*c", Alunos[i].email_inst);
+			//fgets(Alunos[i].email_inst, sizeof(Alunos[i].email_inst), stdin);
 			setbuf(stdin,NULL);
 
 			//Notas
 
 			system("cls");
 			printf("\nPreenchendo as Notas do Aluno!\n");
-			_sleep(1000);
+			sleep(1);
 
 			//printf("\nDigite o nome da Disciplina: \n"); //, cad_Alunos[i].disc.nome_Disc
 			//fgets(cad_Alunos[i].disc.nome_Disc, sizeof(cad_Alunos[i].disc.nome_Disc), stdin);
@@ -411,9 +471,10 @@ void cadastrar_Alunos(cad_Alunos *Alunos) { // Pronto
 			Alunos[i].disc.Media = Soma/3;
 			
 			i++;
-			//Qtd_Cad.Qtd_Cadastro = i;
+			Qtd_Cad->qtd_Cadastro = i;
 
 		}
+
 
 		pos=0;
 
@@ -435,11 +496,11 @@ void cadastrar_Alunos(cad_Alunos *Alunos) { // Pronto
 		if(op==0) {
 			system("cls");
 			printf("\nVOLTANDO AO MENU ALUNOS!!\n");
-			_sleep(1000);
+			sleep(1);
 		}
 
 	} while(op!=0);
-
+	
 }
 
 void listar_Aluno(cad_Alunos *Alunos) { // Pronto
@@ -459,7 +520,7 @@ void listar_Aluno(cad_Alunos *Alunos) { // Pronto
 				system("cls");
 				printf("\n\t---Aluno encontrado!---\n");
 				pos = i;
-				_sleep(1000);
+				sleep(1);
 				break;
 			} else {
 				pos = -1;
@@ -502,12 +563,11 @@ void listar_Aluno(cad_Alunos *Alunos) { // Pronto
 
 void listar_Alunos(cad_Alunos *Alunos) { //pronto
 
-	int i;
 	system("cls");
 	if(Alunos->ativo!=NULL) {
 
 		printf("\n\t---LISTA DE ALUNOS---\n\n");
-		for (i = 0; i < MAX; i++) {
+		for (int i = 0; i < MAX; i++) {
 			if (Alunos[i].ativo==1)
 			{
 
@@ -559,7 +619,7 @@ void sub_menu_Alunos() { //Pronto
 				listar_Aluno(Alunos);
 				break;
 			case 3:
-				cadastrar_Alunos(Alunos/*, Qtd_Cad*/);
+				cadastrar_Alunos(Alunos, &Qtd_Cad);
 				break;
 			case 4:
 				alterar_Alunos(Alunos);
@@ -571,12 +631,12 @@ void sub_menu_Alunos() { //Pronto
 				// Sai do Sub Menu Alunos
 				system("cls");
 				printf("\n\nSaindo do Menu Alunos!\n");
-				_sleep(1000);
+				sleep(1);
 				break;
 			default:
 				system("cls");
 				printf("\n\n!Opcao invalida!\n\n");
-				_sleep(1000);
+				sleep(1);
 		}
 
 	} while (op!=0);
@@ -612,12 +672,12 @@ void sub_menu_Relatorios() { // Pronto
 				// Sai do Sub Menu Alunos
 				system("cls");
 				printf("\n\nSaindo do Menu Relatorios!\n");
-				_sleep(1000);
+				sleep(1);
 				break;
 			default:
 				system("cls");
 				printf("\n\n!Opcao invalida!\n\n");
-				_sleep(1000);
+				sleep(1);
 		}
 
 	} while (op!=0);
@@ -625,6 +685,8 @@ void sub_menu_Relatorios() { // Pronto
 
 void menu() { //Pronto
 	int op;
+
+	ler_arquivo_Struct(Alunos, &Qtd_Cad);
 
 	do {
 		system("cls");
@@ -644,21 +706,25 @@ void menu() { //Pronto
 				break;
 			case 0:
 				system("cls");
+				salvar_em_Arquivos(Alunos, &Qtd_Cad);
+				system("cls");
 				printf("\nSAINDO!\n");
-				_sleep(1000);
-				_exit(1);
+				sleep(1);
+				exit(1);
 				break;
 			default:
 				system("cls");
 				printf("\n---Opcao invalida!---\n\n");
-				_sleep(1000);
+				sleep(1);
 		}
 
 	} while (op!=0);
 }
 
 int main() { //Pronto
+	setlocale(LC_ALL, "Portuguese");
 
+	
 	menu();
 	return 0;
 }
