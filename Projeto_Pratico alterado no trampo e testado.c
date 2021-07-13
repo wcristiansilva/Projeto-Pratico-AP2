@@ -53,6 +53,7 @@ void menu();
 void salvar_em_Arquivos(cad_Alunos *Alunos, Qtd_Cadastro *Qtd_Cad){ // Pronta
 
 	int len_Alunos = Qtd_Cad->qtd_Cadastro;
+	//printf("%d", len_Alunos);
 	FILE *arquivo;
 
 	arquivo = fopen("CADASTRO ALUNOS.txt", "w");
@@ -90,7 +91,7 @@ void ler_arquivo_Struct(cad_Alunos *Alunos, Qtd_Cadastro *Qtd_Cad){
 	}else
 	{
 		//fscanf(arquivo, "%d\n", &quant);
-		while(fscanf(arquivo, "%d" "%s" "%s" "%s" "%s" "%s" "%.2f" "%.2f" "%.2f" "%.2f", &Alunos[quant].ativo, Alunos[quant].prontuario, Alunos[quant].nome, Alunos[quant].data_nasc, Alunos[quant].email_inst, Alunos[quant].disc.nome_Disc, &Alunos[quant].disc.Prova_Pratica, &Alunos[quant].disc.Projeto, &Alunos[quant].disc.Lista_Exercicio, &Alunos[quant].disc.Media)!= EOF){
+		while(fscanf(arquivo, "%d" "%s" "%s" "%s" "%s" "%s" "%f" "%f" "%f" "%f", &Alunos[quant].ativo, Alunos[quant].prontuario, Alunos[quant].nome, Alunos[quant].data_nasc, Alunos[quant].email_inst, Alunos[quant].disc.nome_Disc, &Alunos[quant].disc.Prova_Pratica, &Alunos[quant].disc.Projeto, &Alunos[quant].disc.Lista_Exercicio, &Alunos[quant].disc.Media)!= EOF){
 			quant +=1;
 		}
 		fclose(arquivo);
@@ -119,9 +120,9 @@ void alunos_Aprovados(cad_Alunos *Alunos ) { // Pronto
 				printf("\n\tDisciplina: %s", Alunos[i].disc.nome_Disc);
 				printf("\n\tProntuario: %s", Alunos[i].prontuario);
 				printf("\n\tNome: %s", Alunos[i].nome);
-				printf("\tData de Nascimento: %s", Alunos[i].data_nasc);
-				printf("\tEmail Institucional: %s", Alunos[i].email_inst);
-				printf("----------------------------------------------");
+				printf("\n\tData de Nascimento: %s", Alunos[i].data_nasc);
+				printf("\n\tEmail Institucional: %s", Alunos[i].email_inst);
+				printf("\n----------------------------------------------");
 				printf("\n\n\tAs Notas Obitidas do Aluno %s ", Alunos[i].nome);
 				printf("\n----------------------------------------------");
 				printf("\n\tProva Pratica: %.2f", Alunos[i].disc.Prova_Pratica);
@@ -167,9 +168,9 @@ void alunos_Reprovados(cad_Alunos *Alunos) { // Pronto
 				printf("\n\tDisciplina: %s", Alunos[i].disc.nome_Disc);
 				printf("\n\tProntuario: %s", Alunos[i].prontuario);
 				printf("\n\tNome: %s", Alunos[i].nome);
-				printf("\tData de Nascimento: %s", Alunos[i].data_nasc);
-				printf("\tEmail Institucional: %s", Alunos[i].email_inst);
-				printf("----------------------------------------------");
+				printf("\n\tData de Nascimento: %s", Alunos[i].data_nasc);
+				printf("\n\tEmail Institucional: %s", Alunos[i].email_inst);
+				printf("\n----------------------------------------------");
 				printf("\n\n\tAs Notas Obitidas do Aluno %s ", Alunos[i].nome);
 				printf("\n----------------------------------------------");
 				printf("\n\tProva Pratica: %.2f", Alunos[i].disc.Prova_Pratica);
@@ -213,9 +214,9 @@ void alunos_Inativos(cad_Alunos *Alunos) { //Pronto
 				printf("\n\tDisciplina %s", Alunos[i].disc.nome_Disc);
 				printf("\n\tProntuario: %s", Alunos[i].prontuario);
 				printf("\n\tNome: %s", Alunos[i].nome);
-				printf("\tData de Nascimento: %s", Alunos[i].data_nasc);
-				printf("\tEmail Institucional: %s", Alunos[i].email_inst);
-				printf("----------------------------------------------");
+				printf("\n\tData de Nascimento: %s", Alunos[i].data_nasc);
+				printf("\n\tEmail Institucional: %s", Alunos[i].email_inst);
+				printf("\n----------------------------------------------");
 				printf("\n\n\tAs Notas Obitidas do Aluno %s ", Alunos[i].nome);
 				printf("\n----------------------------------------------");
 				printf("\n\tProva Pratica: %.2f", Alunos[i].disc.Prova_Pratica);
@@ -396,16 +397,23 @@ void cadastrar_Alunos(cad_Alunos *Alunos, Qtd_Cadastro *Qtd_Cad) { // Pronto
 	int op, i=0, j, pos=0;
 	float Soma;
 	char pront[50];
-	
+
 	for(int c; c < MAX; c++) // for usado para verificar se já ha cadastros no sistemas para não haver sobreposição
 	{
 		if(Alunos[c].ativo!=NULL){
-			i += 1;
+			i++; // aqui na hr que for add outro aluno ele add por cima do que esta no mesmo indice tipo ind 1 para ind 1
 		}
 	}
 	
-
+	/*for(int c; c < MAX; c++) // for usado para verificar se já ha cadastros no sistemas para não haver sobreposição
+	{
+		if(Alunos[c].ativo!=NULL){
+			i += 1; // aqui na hr que for add outro aluno ele add por cima do que esta no mesmo indice tipo ind 1 para ind 1
+		}
+	}*/
+	
 	do {
+
 		system("cls");
 		printf("Digite o Prontuario do Aluno:\n");
 		gets(pront);
@@ -420,28 +428,25 @@ void cadastrar_Alunos(cad_Alunos *Alunos, Qtd_Cadastro *Qtd_Cad) { // Pronto
 			}
 		}
 
-		if(pos != -1) {
+		
 
-			/*if (Cont_Cad->Qtd_Cadastro>i) // if usado para verificar se já ha cadastros no sistemas para não haver sobreposição
-			{
-				i = Cont_Cad;
-			}*/
+		if(!pos) {
 
 			//setbuf(stdin,NULL);
 			strcpy(Alunos[i].prontuario, pront);
 			strcpy(Alunos[i].disc.prontuario, pront);
 
 			printf("Digite o Nome do Aluno:\n");
-			//fgets(Alunos[i].nome, sizeof(Alunos[i].nome), stdin);
-			scanf("%50[^\n]%*c", Alunos[i].nome);
+			fgets(Alunos[i].nome, sizeof(Alunos[i].nome), stdin);
+			//scanf("%50[^\n]%*c", Alunos[i].nome);
 			setbuf(stdin,NULL);
 			printf("Digite a Data de Nascimeto do Aluno:\n");
-			scanf("%50[^\n]%*c", Alunos[i].data_nasc);
-			//fgets(Alunos[i].data_nasc, sizeof(Alunos[i].data_nasc), stdin);
+			//scanf("%50[^\n]%*c", Alunos[i].data_nasc);
+			fgets(Alunos[i].data_nasc, sizeof(Alunos[i].data_nasc), stdin);
 			setbuf(stdin,NULL);
 			printf("Digite o Email Institucional do Aluno:\n");
-			scanf("%50[^\n]%*c", Alunos[i].email_inst);
-			//fgets(Alunos[i].email_inst, sizeof(Alunos[i].email_inst), stdin);
+			//scanf("%50[^\n]%*c", Alunos[i].email_inst);
+			fgets(Alunos[i].email_inst, sizeof(Alunos[i].email_inst), stdin);
 			setbuf(stdin,NULL);
 
 			//Notas
@@ -450,8 +455,6 @@ void cadastrar_Alunos(cad_Alunos *Alunos, Qtd_Cadastro *Qtd_Cad) { // Pronto
 			printf("\nPreenchendo as Notas do Aluno!\n");
 			sleep(1);
 
-			//printf("\nDigite o nome da Disciplina: \n"); //, cad_Alunos[i].disc.nome_Disc
-			//fgets(cad_Alunos[i].disc.nome_Disc, sizeof(cad_Alunos[i].disc.nome_Disc), stdin);
 			strcpy(Alunos[i].disc.nome_Disc, "AP2");
 
 			system("cls");
@@ -489,6 +492,7 @@ void cadastrar_Alunos(cad_Alunos *Alunos, Qtd_Cadastro *Qtd_Cad) { // Pronto
 				system("cls");
 				printf("\nLimite de cadastros atingido!!\n");
 				op = 0;
+				sleep(1);
 				break;
 			}
 		}
@@ -541,11 +545,11 @@ void listar_Aluno(cad_Alunos *Alunos) { // Pronto
 			printf("\n\tDisciplina: %s", Alunos[pos].disc.nome_Disc);
 			printf("\n\tProntuario: %s", Alunos[pos].prontuario);
 			printf("\n\tNome: %s", Alunos[pos].nome);
-			printf("\tData de Nascimento: %s", Alunos[pos].data_nasc);
-			printf("\tEmail Institucional: %s", Alunos[pos].email_inst);
-			printf("----------------------------------------------");
+			printf("\n\tData de Nascimento: %s", Alunos[pos].data_nasc);
+			printf("\n\tEmail Institucional: %s", Alunos[pos].email_inst);
+			printf("\n----------------------------------------------");
 			printf("\n\n\tAs Notas Obitidas do Aluno %s ", Alunos[pos].nome);
-			printf("----------------------------------------------");
+			printf("\n\n----------------------------------------------");
 			printf("\n\tProva Pratica: %.2f", Alunos[pos].disc.Prova_Pratica);
 			printf("\n\tProjeto: %.2f", Alunos[pos].disc.Projeto);
 			printf("\n\tLista de Exercicios: %.2f", Alunos[pos].disc.Lista_Exercicio);
@@ -575,9 +579,9 @@ void listar_Alunos(cad_Alunos *Alunos) { //pronto
 				printf("\n\tDisciplina: %s", Alunos[i].disc.nome_Disc);
 				printf("\n\tProntuario: %s", Alunos[i].prontuario);
 				printf("\n\tNome: %s", Alunos[i].nome);
-				printf("\tData de Nascimento: %s", Alunos[i].data_nasc);
-				printf("\tEmail Institucional: %s", Alunos[i].email_inst);
-				printf("----------------------------------------------");
+				printf("\n\tData de Nascimento: %s", Alunos[i].data_nasc);
+				printf("\n\tEmail Institucional: %s", Alunos[i].email_inst);
+				printf("\n----------------------------------------------");
 				printf("\n\n\tAs Notas Obitidas do Aluno %s ", Alunos[i].nome);
 				printf("\n----------------------------------------------");
 				printf("\n\tProva Pratica: %.2f", Alunos[i].disc.Prova_Pratica);
